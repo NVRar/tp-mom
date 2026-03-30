@@ -35,3 +35,15 @@ class MessageMiddlewareExchangeRabbitMQ(MessageMiddlewareExchange):
     
     def __init__(self, host, exchange_name, routing_keys):
         pass
+
+    def close(self):
+        pass
+    
+    def send(self, message):
+        pass
+
+    def start_consuming(self, callback):
+        pass
+    
+    def stop_consuming(self):
+        pass

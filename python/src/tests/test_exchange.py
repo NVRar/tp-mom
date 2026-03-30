@@ -131,7 +131,7 @@ def _test_exchange(routing_keys_by_consumers, messages_by_routing_key):
 # -----------------------------------------------------------------------------
 # GENERAL TESTS
 # -----------------------------------------------------------------------------
-@pytest.mark.skip
+
 def test_init_and_close():
 	routing_keys = ["route_1"]
 	exchange = middleware_rabbitmq.MessageMiddlewareExchangeRabbitMQ(MOM_HOST, TEST_EXCHANGE_NAME, routing_keys)
