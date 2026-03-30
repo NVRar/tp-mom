@@ -73,7 +73,7 @@ def test_listen_to_message_and_close():
 
 	assert len(message_set) == 1, "The amount of consummed messages is not as expected"
 	assert message in message_set, f"The message {message} was not consummed"
-@pytest.mark.skip
+
 def _test_messages_dont_mix_between_queues(queue_name, queue, messages):
 	message_set = set()
 	message_consumer_tester = MessageConsumerTester(queue, message_set, len(messages))
@@ -83,7 +83,7 @@ def _test_messages_dont_mix_between_queues(queue_name, queue, messages):
 	assert len(message_set) == len(messages), f"The amount of consummed messages is not as expected in {queue_name}"
 	for message in messages:
 		assert message in message_set, f"The message {message} was not consummed from {queue_name}"
-@pytest.mark.skip
+
 def test_messages_dont_mix_between_queues():
 	messages = _generate_messages(8)
 	messages_a = messages[:4]
@@ -105,33 +105,33 @@ def test_messages_dont_mix_between_queues():
 # -----------------------------------------------------------------------------
 #  PRODUCER CONSUMER TESTS
 # -----------------------------------------------------------------------------
-@pytest.mark.skip
+
 def test_one_producer_one_consumer_one_message():
 	_test_queue(1, 1, 1)
-@pytest.mark.skip
+
 def test_one_producer_one_consumer_some_messages():
 	_test_queue(1, 1, 3)
-@pytest.mark.skip
+
 def test_one_producer_one_consumer_many_messages():
 	_test_queue(1, 1, 13)
-@pytest.mark.skip
+
 def test_one_producer_many_consumers_some_messages():
 	_test_queue(1, 3, 3)
-@pytest.mark.skip
+
 def test_one_producer_many_consumers_many_messages():
 	_test_queue(1, 3, 13)
-@pytest.mark.skip
+
 def test_many_producers_one_consumer_one_message():
 	_test_queue(3, 1, 1)
-@pytest.mark.skip
+
 def test_many_producers_one_consumer_some_messages():
 	_test_queue(3, 1, 3)
-@pytest.mark.skip
+
 def test_many_producers_one_consumer_many_messages():
 	_test_queue(3, 1, 13)
-@pytest.mark.skip
+
 def test_many_producers_many_consumers_some_messages():
 	_test_queue(3, 3, 3)
-@pytest.mark.skip
+
 def test_many_producers_many_consumers_many_messages():
 	_test_queue(3, 3, 13)
