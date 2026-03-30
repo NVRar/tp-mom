@@ -6,10 +6,13 @@ from .middleware import MessageMiddlewareQueue, MessageMiddlewareExchange
 class MessageMiddlewareQueueRabbitMQ(MessageMiddlewareQueue):
 
     def __init__(self, host, queue_name):
-        pass
+        self.connection = pika.BlockingConnection(pika.ConnectionParameters(host=host))
+        self.channel = self.connection.channel()
+        self.queue_name = queue_name
+        self.channel.queue_declare(queue=queue_name, durable=True)
 
     def close(self):
-        pass
+        self.connection.close()
 
     def send(self, message):
         pass
