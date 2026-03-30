@@ -15,13 +15,21 @@ class MessageMiddlewareQueueRabbitMQ(MessageMiddlewareQueue):
         self.connection.close()
 
     def send(self, message):
-        pass
+        self.channel.basic_publish(exchange='', routing_key=self.queue_name, body=message, properties=pika.BasicProperties(delivery_mode=2))
 
     def start_consuming(self, callback):
-        pass
+        self.channel.basic_qos(prefetch_count=1)
+
+        def callback_wrapper(channel, method, properties, body):
+            ack = lambda: channel.basic_ack(delivery_tag=method.delivery_tag)
+            nack = lambda: channel.basic_nack(delivery_tag=method.delivery_tag)
+            callback(body, ack, nack)
+
+        self.channel.basic_consume(queue=self.queue_name, on_message_callback=callback_wrapper, auto_ack=False)
+        self.channel.start_consuming()
 
     def stop_consuming(self):
-        pass
+        self.channel.stop_consuming()
   
 
 class MessageMiddlewareExchangeRabbitMQ(MessageMiddlewareExchange):
