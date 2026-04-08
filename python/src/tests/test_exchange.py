@@ -140,21 +140,20 @@ def test_init_and_close():
 # -----------------------------------------------------------------------------
 #  DIRECT MESSAGING TESTS
 # -----------------------------------------------------------------------------
-@pytest.mark.skip
 def test_direct_messaging_one_consumer_one_message():
 	_test_exchange({
 		"consumer_1": ["route_1"]
 		}, {
 		"route_1": [b"message"]
 		})
-@pytest.mark.skip
+
 def test_direct_messaging_one_consumer_many_messages():
 	_test_exchange({
 		"consumer_1": ["route_1"]
 		}, {
 		"route_1": [b"message", b"message_2", b"message_3"]
 		})
-@pytest.mark.skip
+
 def test_direct_messaging_many_consumers_many_messages():
 	_test_exchange({
 		"consumer_1": ["route_1"],
@@ -169,7 +168,7 @@ def test_direct_messaging_many_consumers_many_messages():
 # -----------------------------------------------------------------------------
 #  BROADCAST MESSAGING TESTS
 # -----------------------------------------------------------------------------
-@pytest.mark.skip
+
 def test_broadcast_single_routing_key():
 	_test_exchange({
 		"consumer_1": ["route_1"],
@@ -178,7 +177,7 @@ def test_broadcast_single_routing_key():
 		}, {
 		"route_1": [b"message_1"],
 		})
-@pytest.mark.skip
+
 def test_broadcast_many_routing_keys():
 	_test_exchange({
 		"consumer_1": ["route_1"],
