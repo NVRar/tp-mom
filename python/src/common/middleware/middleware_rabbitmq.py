@@ -48,6 +48,7 @@ class MessageMiddlewareExchangeRabbitMQ(MessageMiddlewareExchange):
             self.channel.basic_publish(exchange=self.exchange_name, routing_key=routing_key, body=message)
 
     def start_consuming(self, callback):
+        self.channel.basic_qos(prefetch_count=1)
         result = self.channel.queue_declare(queue='', exclusive=True)
         queue_name = result.method.queue
         for routing_key in self.routing_keys:
